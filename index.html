@@ -111,7 +111,7 @@ footer strong { font-family: var(--font-display); letter-spacing: .2em; text-tra
 .modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; background: var(--scrim); overflow-y: auto; }
 .modal[hidden] { display: none; }
 .sheet { position: relative; width: 100%; max-width: 860px; margin: auto; background: var(--surface); border: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-.sheet .pic { aspect-ratio: 4 / 5; background: #000; min-width: 0; }
+.sheet .pic { position: relative; aspect-ratio: 4 / 5; background: #000; min-width: 0; }
 .sheet .body { padding: 28px 28px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .sheet h2 { font-size: 40px; text-transform: uppercase; }
 .sheet .ref { font-family: var(--font-display); letter-spacing: .16em; font-size: 13px; color: var(--gold); text-transform: uppercase; font-weight: 600; }
@@ -164,6 +164,12 @@ footer strong { font-family: var(--font-display); letter-spacing: .2em; text-tra
   html { scroll-behavior: auto; }
   .card .ph img { transition: none; }
 }
+
+/* Vendido: imagen atenuada y cinta al centro */
+.ph.sold img, .pic.sold img { filter: grayscale(.6) brightness(.45); }
+.sold-band { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 2; pointer-events: none; text-align: center; background: rgba(13,14,16,.88); border-block: 2px solid var(--gold); color: var(--gold); font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .32em; font-size: 22px; padding: 10px 0 10px .32em; }
+.card.is-sold .price { color: var(--muted); text-decoration: line-through; }
+@media (max-width: 560px) { .sold-band { font-size: 15px; padding-block: 7px; } }
 </style>
 
 <div class="wrap">
@@ -222,7 +228,7 @@ footer strong { font-family: var(--font-display); letter-spacing: .2em; text-tra
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" hidden>
   <div class="sheet">
     <button type="button" class="close" id="m-close" aria-label="Cerrar ficha">×</button>
-    <div class="pic"><img id="m-img" src="" alt="" width="900" height="1125"></div>
+    <div class="pic" id="m-pic"><img id="m-img" src="" alt="" width="900" height="1125"></div>
     <div class="body">
       <span class="ref" id="m-ref"></span>
       <h2 id="m-title"></h2>
@@ -246,18 +252,18 @@ footer strong { font-family: var(--font-display); letter-spacing: .2em; text-tra
 var WATCHES = [
   { ref: "8291-1", img: "p-02", price: 119900, strap: "cuero", desc: "Esfera azul, correa de cuero café" },
   { ref: "8291-2", img: "p-03", price: 119900, strap: "cuero", desc: "Esfera negra, correa negra" },
-  { ref: "8301-1", img: "p-04", price: 109900, strap: "cuero", desc: "Esfera azul calada, correa de cuero café claro" },
+  { ref: "8301-1", sold: true, img: "p-04", price: 109900, strap: "cuero", desc: "Esfera azul calada, correa de cuero café claro" },
   { ref: "8301-2", img: "p-05", price: 109900, strap: "cuero", desc: "Esfera gris calada, correa de cuero café oscuro" },
   { ref: "8329-1", img: "p-06", price: 139900, strap: "cuero", desc: "Esfera negra, caja oro rosa, cuero vino" },
   { ref: "8329-2", img: "p-07", price: 139900, strap: "cuero", desc: "Esfera negra con dorado, correa negra" },
   { ref: "8355-1", img: "p-08", price: 119900, strap: "acero", desc: "Esfera blanca, bisel oro rosa, acero plateado" },
-  { ref: "8355-2", img: "p-09", price: 119900, strap: "acero", desc: "Esfera azul, acero plateado", featured: true },
+  { ref: "8355-2", sold: true, img: "p-09", price: 119900, strap: "acero", desc: "Esfera azul, acero plateado", featured: true },
   { ref: "8360-1", img: "p-10", price: 129900, strap: "acero", desc: "Esfera azul, oro rosa, acero azul" },
   { ref: "8360-2", img: "p-11", price: 139900, strap: "acero", desc: "Esfera blanca, acero dorado" },
   { ref: "8363-1", img: "p-12", price: 129900, strap: "acero", desc: "Esfera azul, acero plateado" },
   { ref: "8363-2", img: "p-13", price: 139900, strap: "acero", desc: "Esfera blanca, bisel oro rosa, acero plateado", featured: true },
-  { ref: "8395-1", img: "p-14", price: 149900, strap: "acero", desc: "Esfera negra, acero negro", featured: true },
-  { ref: "8395-2", img: "p-15", price: 149900, strap: "acero", desc: "Esfera verde, acero negro" },
+  { ref: "8395-1", sold: true, img: "p-14", price: 149900, strap: "acero", desc: "Esfera negra, acero negro", featured: true },
+  { ref: "8395-2", sold: true, img: "p-15", price: 149900, strap: "acero", desc: "Esfera verde, acero negro" },
   { ref: "8402-1", img: "p-16", price: 129900, strap: "acero", desc: "Esfera negra con detalles celeste, acero plateado" },
   { ref: "8415-1", img: "p-17", price: 129900, strap: "acero", desc: "Esfera negra con azul y rojo, acero plateado" },
   { ref: "8459-1", img: "p-18", price: 119900, strap: "acero", desc: "Esfera blanca, caja cuadrada, acero dorado" }
@@ -268,11 +274,11 @@ function money(n) { return "$" + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "
 
 function card(w, big) {
   var el = document.createElement("article");
-  el.className = "card";
+  el.className = "card" + (w.sold ? " is-sold" : "");
   var model = w.ref.split("-")[0];
   el.innerHTML =
-    '<div class="ph"><img loading="lazy" src="img/' + w.img + '.jpg" alt="Reloj Curren ' + w.ref + ': ' + w.desc + '" width="900" height="1125">' +
-    (big ? '<span class="tag">Destacado</span>' : '') +
+    '<div class="ph' + (w.sold ? ' sold' : '') + '"><img loading="lazy" src="img/' + w.img + '.jpg" alt="Reloj Curren ' + w.ref + ': ' + w.desc + '" width="900" height="1125">' +
+    (big ? '<span class="tag">Destacado</span>' : '') + (w.sold ? '<div class="sold-band">Vendido</div>' : '') +
     '<button type="button" class="hit js-open" data-ref="' + w.ref + '" aria-label="Ver ficha del Curren ' + w.ref + '"></button></div>' +
     '<div class="info">' +
     '<span class="ref">Ref. ' + w.ref + '</span>' +
@@ -330,6 +336,11 @@ function show(i) {
   var w = WATCHES[openIdx], d = DETAILS[w.ref] || {};
   var img = document.getElementById("m-img");
   img.src = "img/" + w.img + ".jpg";
+  var pic = document.getElementById("m-pic");
+  pic.classList.toggle("sold", !!w.sold);
+  var band = pic.querySelector(".sold-band");
+  if (w.sold && !band) { band = document.createElement("div"); band.className = "sold-band"; band.textContent = "Vendido"; pic.appendChild(band); }
+  if (!w.sold && band) band.remove();
   img.alt = "Reloj Curren " + w.ref + ": " + w.desc;
   document.getElementById("m-ref").textContent = "Ref. " + w.ref;
   document.getElementById("m-title").textContent = "Curren " + w.ref.split("-")[0];
