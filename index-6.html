@@ -1,0 +1,432 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Catálogo Curren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: portada a dos columnas, tres destacados grandes y rejilla filtrable por tipo de correa. Una sola mirada oscura, sobria. */
+:root {
+  --bg: #0d0e10;
+  --surface: #15171a;
+  --line: #262a2f;
+  --fg: #ecebe7;
+  --muted: #9b9ea4;
+  --gold: #c8a560;
+  --gold-ink: #17130a;
+  --font-display: "Archivo Narrow", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-inline: 20px;
+}
+.wrap { max-width: 1180px; margin-inline: auto; }
+a { color: inherit; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; margin: 0; text-wrap: balance; line-height: 1.05; }
+
+/* Cabecera */
+.top { display: flex; justify-content: space-between; align-items: center; padding-block: 20px; border-bottom: 1px solid var(--line); gap: 16px; }
+.top .brand { font-family: var(--font-display); font-weight: 700; letter-spacing: .22em; text-transform: uppercase; font-size: 15px; }
+.top nav { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+.top nav a { text-decoration: none; padding-block: 4px; }
+.top nav a:hover, .top nav a:focus-visible { color: var(--fg); }
+
+/* Portada */
+.hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding-block: 56px; }
+.hero-copy { min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+.hero h1 { font-size: clamp(44px, 7vw, 84px); text-transform: uppercase; letter-spacing: .01em; }
+.hero p { margin: 0; color: var(--muted); max-width: 44ch; font-size: 17px; }
+.btn { align-self: flex-start; display: inline-block; background: var(--gold); color: var(--gold-ink); font-weight: 600; text-decoration: none; padding: 13px 22px; font-size: 15px; letter-spacing: .02em; border-radius: 2px; }
+.btn:hover { filter: brightness(1.08); }
+.btn:focus-visible, .chip:focus-visible, .card a:focus-visible, .top nav a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.cover { margin: 0; aspect-ratio: 4 / 5; max-width: 100%; border: 1px solid var(--line); overflow: hidden; }
+
+/* Destacados */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+.sec-head h2 { font-size: clamp(30px, 4.5vw, 46px); text-transform: uppercase; margin-top: 8px; }
+.sec-head p { margin: 0; color: var(--muted); max-width: 38ch; font-size: 15px; }
+.featured { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+/* Tarjetas */
+.card { min-width: 0; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; }
+.card .ph { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #000; }
+.card .ph img { transition: transform .6s ease; }
+.card:hover .ph img { transform: scale(1.03); }
+.card .tag { position: absolute; top: 12px; left: 12px; background: var(--gold); color: var(--gold-ink); font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; padding: 5px 9px; }
+.card .info { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.card .ref { font-family: var(--font-display); letter-spacing: .14em; font-size: 13px; color: var(--muted); text-transform: uppercase; }
+.card h3 { font-size: 26px; text-transform: uppercase; }
+.card .desc { color: var(--muted); font-size: 14px; margin: 0; }
+.card .price { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--line); font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: .02em; font-variant-numeric: tabular-nums; color: var(--gold); }
+.card .price small { font-size: 12px; font-weight: 600; letter-spacing: .12em; color: var(--muted); margin-left: 6px; text-transform: uppercase; }
+.featured .card h3 { font-size: 34px; }
+
+/* Filtros y rejilla */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { font: inherit; font-size: 14px; font-weight: 500; background: transparent; color: var(--fg); border: 1px solid var(--line); padding: 9px 16px; cursor: pointer; border-radius: 2px; }
+.chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); font-weight: 600; }
+.chip .n { opacity: .7; margin-left: 6px; font-variant-numeric: tabular-nums; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+
+footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
+footer strong { font-family: var(--font-display); letter-spacing: .2em; text-transform: uppercase; color: var(--fg); }
+
+/* WhatsApp, ficha y botones */
+:root { --wa: #25d366; --wa-ink: #06210f; --scrim: rgba(5, 6, 8, .78); }
+.btn-wa { display: inline-flex; align-items: center; justify-content: center; gap: 9px; background: var(--wa); color: var(--wa-ink); font: inherit; font-weight: 600; font-size: 15px; text-decoration: none; padding: 12px 20px; border: 0; border-radius: 2px; cursor: pointer; }
+.btn-wa:hover { filter: brightness(1.07); }
+.btn-wa svg { width: 20px; height: 20px; flex: none; fill: currentColor; }
+.btn-wa:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.top .btn-wa { padding: 9px 14px; font-size: 14px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.card .ph .hit { all: unset; position: absolute; inset: 0; cursor: pointer; z-index: 1; }
+.card .ph .hit:focus-visible { outline: 2px solid var(--gold); outline-offset: -4px; }
+.card .ph .tag { z-index: 2; }
+.card .actions { margin-top: 12px; display: flex; gap: 8px; }
+.card .ficha { flex: 1; font: inherit; font-size: 14px; font-weight: 600; background: transparent; color: var(--fg); border: 1px solid var(--line); padding: 10px 12px; cursor: pointer; border-radius: 2px; }
+.card .ficha:hover { border-color: var(--gold); color: var(--gold); }
+.card .ficha:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; background: var(--scrim); overflow-y: auto; }
+.modal[hidden] { display: none; }
+.sheet { position: relative; width: 100%; max-width: 860px; margin: auto; background: var(--surface); border: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.sheet .pic { position: relative; aspect-ratio: 4 / 5; background: #000; min-width: 0; }
+.sheet .body { padding: 28px 28px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.sheet h2 { font-size: 40px; text-transform: uppercase; }
+.sheet .ref { font-family: var(--font-display); letter-spacing: .16em; font-size: 13px; color: var(--gold); text-transform: uppercase; font-weight: 600; }
+.sheet .sheet-price { font-family: var(--font-display); font-weight: 700; font-size: 30px; font-variant-numeric: tabular-nums; }
+.sheet .sheet-price small { font-size: 12px; letter-spacing: .12em; color: var(--muted); margin-left: 6px; }
+.sheet .lead { margin: 0; color: var(--muted); font-size: 15px; }
+.sheet dl { margin: 6px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 14px; border-top: 1px solid var(--line); padding-top: 14px; }
+.sheet dt { color: var(--muted); }
+.sheet dd { margin: 0; min-width: 0; }
+.sheet .btn-wa { margin-top: auto; }
+.sheet .nav-row { display: flex; gap: 8px; }
+.sheet .nav-row button { flex: 1; font: inherit; font-size: 14px; background: transparent; color: var(--fg); border: 1px solid var(--line); padding: 9px 10px; cursor: pointer; border-radius: 2px; }
+.sheet .nav-row button:hover { border-color: var(--gold); color: var(--gold); }
+.sheet .nav-row button:focus-visible, .sheet .close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.sheet .close { position: absolute; top: 10px; right: 10px; z-index: 3; width: 40px; height: 40px; font-size: 22px; line-height: 1; background: rgba(13, 14, 16, .72); color: var(--fg); border: 1px solid var(--line); border-radius: 50%; cursor: pointer; }
+.sheet .close:hover { border-color: var(--gold); }
+
+.fab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; box-shadow: 0 8px 24px rgba(0, 0, 0, .45); border-radius: 999px; padding: 13px 20px; }
+
+@media (max-width: 860px) {
+  .sheet { grid-template-columns: minmax(0, 1fr); max-width: 480px; }
+  .sheet .pic { aspect-ratio: 1 / 1; }
+  .sheet h2 { font-size: 34px; }
+  .sheet .body { padding: 20px 18px 18px; }
+}
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; padding-block: 36px; }
+  .cover { order: -1; }
+  .featured { grid-template-columns: 1fr; }
+  .top nav { gap: 16px; }
+}
+@media (max-width: 520px) {
+  .top .brand { font-size: 13px; letter-spacing: .16em; }
+  .top nav { display: none; }
+  .top .btn-wa span { display: none; }
+  .top .btn-wa { padding: 9px 11px; }
+  .card .actions { margin-top: 8px; }
+  .card .ficha { padding: 9px 8px; font-size: 13px; }
+  .fab { padding: 13px; }
+  .fab span { display: none; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card .info { padding: 12px 12px 14px; }
+  .card h3 { font-size: 20px; }
+  .card .desc { font-size: 13px; }
+  .card .price { font-size: 20px; }
+  .card .price small { display: none; }
+  .card .tag { top: 8px; left: 8px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card .ph img { transition: none; }
+}
+
+/* Vendido: imagen atenuada y cinta al centro */
+.ph.sold img, .pic.sold img { filter: grayscale(.6) brightness(.45); }
+.sold-band { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 2; pointer-events: none; text-align: center; background: rgba(13,14,16,.88); border-block: 2px solid var(--gold); color: var(--gold); font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .32em; font-size: 22px; padding: 10px 0 10px .32em; }
+.card.is-sold .price { color: var(--muted); text-decoration: line-through; }
+@media (max-width: 560px) { .sold-band { font-size: 15px; padding-block: 7px; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="brand">Curren · Catálogo</span>
+    <nav aria-label="Secciones">
+      <a href="#destacados">Destacados</a>
+      <a href="#referencias">Referencias</a>
+    </nav>
+    <a class="btn-wa js-wa" data-msg="Hola, quiero hacer un pedido de un reloj Curren." href="#" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.83.83-3.03-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.13c-.25-.12-1.46-.72-1.69-.8-.23-.09-.39-.13-.56.12-.17.25-.64.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.01 2.57c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.23-.17-.48-.29Z"/></svg><span>Pedir por WhatsApp</span></a>
+  </header>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="label">Relojes para caballero</span>
+      <h1>El tiempo también es una herramienta</h1>
+      <p>Diecisiete referencias Curren en acero y cuero, con cronógrafo, calendario y acabados en negro, plateado, oro rosa y dorado. Sobrios, con carácter, sin excesos.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#referencias">Ver referencias</a>
+        <a class="btn-wa js-wa" data-msg="Hola, quiero hacer un pedido de un reloj Curren." href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      </div>
+    </div>
+    <figure class="cover"><img src="img/p-01.jpg" alt="Portada Curren: hombre con gafas oscuras luciendo un reloj cronógrafo negro" width="900" height="1125"></figure>
+  </div>
+
+  <section id="destacados" aria-labelledby="t-dest">
+    <div class="sec-head">
+      <div>
+        <span class="label">Modelos destacados</span>
+        <h2 id="t-dest">Tres para empezar</h2>
+      </div>
+      <p>La selección que mejor resume el catálogo: un blanco con oro rosa, un azul clásico y un negro total.</p>
+    </div>
+    <div class="featured" id="featured"></div>
+  </section>
+
+  <section id="referencias" aria-labelledby="t-ref">
+    <div class="sec-head">
+      <div>
+        <span class="label">Todas las referencias</span>
+        <h2 id="t-ref">Catálogo completo</h2>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filtrar por correa"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer>
+    <strong>Curren</strong>
+    <span>Precios en pesos colombianos (COP).</span>
+  </footer>
+</div>
+
+<a class="btn-wa fab js-wa" data-msg="Hola, quiero hacer un pedido de un reloj Curren." href="#" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.83.83-3.03-.2-.31a8.2 8.2 0 1 1 6.97 3.84Zm4.5-6.13c-.25-.12-1.46-.72-1.69-.8-.23-.09-.39-.13-.56.12-.17.25-.64.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.01 2.57c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.14-1.17-.06-.1-.23-.17-.48-.29Z"/></svg><span>Pedir por WhatsApp</span></a>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" hidden>
+  <div class="sheet">
+    <button type="button" class="close" id="m-close" aria-label="Cerrar ficha">×</button>
+    <div class="pic" id="m-pic"><img id="m-img" src="" alt="" width="900" height="1125"></div>
+    <div class="body">
+      <span class="ref" id="m-ref"></span>
+      <h2 id="m-title"></h2>
+      <div class="sheet-price"><span id="m-price"></span><small>COP</small></div>
+      <p class="lead" id="m-desc"></p>
+      <dl>
+        <dt>Correa</dt><dd id="m-strap"></dd>
+        <dt>Funciones</dt><dd id="m-funcs"></dd>
+        <dt>Ideal para</dt><dd id="m-ideal"></dd>
+      </dl>
+      <a class="btn-wa" id="m-wa" href="#" target="_blank" rel="noopener">Pedir este reloj por WhatsApp</a>
+      <div class="nav-row">
+        <button type="button" id="m-prev">← Anterior</button>
+        <button type="button" id="m-next">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var WATCHES = [
+  { ref: "8291-1", img: "p-02", price: 119900, strap: "cuero", desc: "Esfera azul, correa de cuero café" },
+  { ref: "8291-2", img: "p-03", price: 119900, strap: "cuero", desc: "Esfera negra, correa negra" },
+  { ref: "8301-1", sold: true, img: "p-04", price: 109900, strap: "cuero", desc: "Esfera azul calada, correa de cuero café claro" },
+  { ref: "8301-2", sold: true, img: "p-05", price: 109900, strap: "cuero", desc: "Esfera gris calada, correa de cuero café oscuro" },
+  { ref: "8329-1", sold: true, img: "p-06", price: 139900, strap: "cuero", desc: "Esfera negra, caja oro rosa, cuero vino" },
+  { ref: "8329-2", img: "p-07", price: 139900, strap: "cuero", desc: "Esfera negra con dorado, correa negra" },
+  { ref: "8355-1", img: "p-08", price: 119900, strap: "acero", desc: "Esfera blanca, bisel oro rosa, acero plateado" },
+  { ref: "8355-2", sold: true, img: "p-09", price: 119900, strap: "acero", desc: "Esfera azul, acero plateado", featured: true },
+  { ref: "8360-1", sold: true, img: "p-10", price: 129900, strap: "acero", desc: "Esfera azul, oro rosa, acero azul" },
+  { ref: "8360-2", img: "p-11", price: 139900, strap: "acero", desc: "Esfera blanca, acero dorado" },
+  { ref: "8363-1", img: "p-12", price: 129900, strap: "acero", desc: "Esfera azul, acero plateado" },
+  { ref: "8363-2", img: "p-13", price: 139900, strap: "acero", desc: "Esfera blanca, bisel oro rosa, acero plateado", featured: true },
+  { ref: "8395-1", sold: true, img: "p-14", price: 149900, strap: "acero", desc: "Esfera negra, acero negro", featured: true },
+  { ref: "8395-2", sold: true, img: "p-15", price: 149900, strap: "acero", desc: "Esfera verde, acero negro" },
+  { ref: "8402-1", img: "p-16", price: 129900, strap: "acero", desc: "Esfera negra con detalles celeste, acero plateado" },
+  { ref: "8415-1", img: "p-17", price: 129900, strap: "acero", desc: "Esfera negra con azul y rojo, acero plateado" },
+  { ref: "8459-1", img: "p-18", price: 119900, strap: "acero", desc: "Esfera blanca, caja cuadrada, acero dorado" }
+];
+var FEATURED_ORDER = ["8363-2", "8360-1", "8363-1"];
+
+function money(n) { return "$" + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+
+function card(w, big) {
+  var el = document.createElement("article");
+  el.className = "card" + (w.sold ? " is-sold" : "");
+  var model = w.ref.split("-")[0];
+  el.innerHTML =
+    '<div class="ph' + (w.sold ? ' sold' : '') + '"><img loading="lazy" src="img/' + w.img + '.jpg" alt="Reloj Curren ' + w.ref + ': ' + w.desc + '" width="900" height="1125">' +
+    (big ? '<span class="tag">Destacado</span>' : '') + (w.sold ? '<div class="sold-band">Vendido</div>' : '') +
+    '<button type="button" class="hit js-open" data-ref="' + w.ref + '" aria-label="Ver ficha del Curren ' + w.ref + '"></button></div>' +
+    '<div class="info">' +
+    '<span class="ref">Ref. ' + w.ref + '</span>' +
+    '<h3>Curren ' + model + '</h3>' +
+    '<p class="desc">' + w.desc + '</p>' +
+    '<div class="price">' + money(w.price) + '<small>COP</small></div>' +
+    '<div class="actions"><button type="button" class="ficha js-open" data-ref="' + w.ref + '">Ver ficha</button></div>' +
+    '</div>';
+  return el;
+}
+
+/* Número de WhatsApp con código de país y sin signos, por ejemplo "573001234567". Si queda vacío, WhatsApp deja elegir el contacto. */
+var WHATSAPP_NUMBER = "573103619471";
+function waLink(msg) {
+  return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+}
+Array.prototype.forEach.call(document.querySelectorAll(".js-wa"), function (a) {
+  a.href = waLink(a.dataset.msg);
+});
+
+var CRON = "Cronógrafo con subesferas y calendario";
+var CAL = "Esfera calada con calendario visible";
+var DETAILS = {
+  "8291-1": { strap: "Cuero café, caja negra", funcs: CRON, ideal: "Uso diario, look casual" },
+  "8291-2": { strap: "Correa negra, caja negra", funcs: CRON, ideal: "Sobrio, para todos los días" },
+  "8301-1": { strap: "Cuero café claro, caja negra", funcs: CAL, ideal: "Casual con carácter" },
+  "8301-2": { strap: "Cuero café oscuro, caja negra", funcs: CAL, ideal: "Casual, estilo robusto" },
+  "8329-1": { strap: "Cuero vino, caja oro rosa", funcs: CRON, ideal: "Elegante informal" },
+  "8329-2": { strap: "Correa negra, caja dorada", funcs: CRON, ideal: "Elegante, con presencia" },
+  "8355-1": { strap: "Acero plateado", funcs: CRON, ideal: "Elegante, oficina" },
+  "8355-2": { strap: "Acero plateado", funcs: CRON, ideal: "Clásico, oficina y reuniones" },
+  "8360-1": { strap: "Acero azul, caja oro rosa", funcs: CRON, ideal: "Elegante, ocasiones especiales" },
+  "8360-2": { strap: "Acero dorado", funcs: CRON, ideal: "Eventos y ocasiones especiales" },
+  "8363-1": { strap: "Acero plateado", funcs: CRON, ideal: "Clásico, diario y trabajo" },
+  "8363-2": { strap: "Acero plateado, bisel oro rosa", funcs: CRON, ideal: "Elegante y versátil" },
+  "8395-1": { strap: "Acero negro", funcs: CRON, ideal: "Sobrio, total black" },
+  "8395-2": { strap: "Acero negro", funcs: CRON, ideal: "Sobrio con un toque de color" },
+  "8402-1": { strap: "Acero plateado", funcs: CRON, ideal: "Deportivo, uso diario" },
+  "8415-1": { strap: "Acero plateado", funcs: CRON, ideal: "Deportivo, con carácter" },
+  "8459-1": { strap: "Acero dorado", funcs: CRON, ideal: "Elegante, caja cuadrada distintiva" }
+};
+
+var modal = document.getElementById("modal");
+var openIdx = -1;
+var lastFocus = null;
+
+function byRef(ref) {
+  for (var i = 0; i < WATCHES.length; i++) if (WATCHES[i].ref === ref) return i;
+  return -1;
+}
+
+function show(i) {
+  var n = WATCHES.length;
+  openIdx = (i + n) % n;
+  var w = WATCHES[openIdx], d = DETAILS[w.ref] || {};
+  var img = document.getElementById("m-img");
+  img.src = "img/" + w.img + ".jpg";
+  var pic = document.getElementById("m-pic");
+  pic.classList.toggle("sold", !!w.sold);
+  var band = pic.querySelector(".sold-band");
+  if (w.sold && !band) { band = document.createElement("div"); band.className = "sold-band"; band.textContent = "Vendido"; pic.appendChild(band); }
+  if (!w.sold && band) band.remove();
+  img.alt = "Reloj Curren " + w.ref + ": " + w.desc;
+  document.getElementById("m-ref").textContent = "Ref. " + w.ref;
+  document.getElementById("m-title").textContent = "Curren " + w.ref.split("-")[0];
+  document.getElementById("m-price").textContent = money(w.price);
+  document.getElementById("m-desc").textContent = w.desc;
+  document.getElementById("m-strap").textContent = d.strap || "";
+  document.getElementById("m-funcs").textContent = d.funcs || "";
+  document.getElementById("m-ideal").textContent = d.ideal || "";
+  document.getElementById("m-wa").href = waLink("Hola, quiero pedir el reloj Curren " + w.ref + " (" + money(w.price) + " COP). ¿Está disponible?");
+}
+
+function openModal(ref) {
+  var i = byRef(ref);
+  if (i < 0) return;
+  lastFocus = document.activeElement;
+  show(i);
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+  document.getElementById("m-close").focus();
+}
+function closeModal() {
+  modal.hidden = true;
+  document.body.style.overflow = "";
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+
+document.addEventListener("click", function (e) {
+  var opener = e.target.closest ? e.target.closest(".js-open") : null;
+  if (opener) { openModal(opener.dataset.ref); return; }
+  if (e.target === modal) closeModal();
+});
+document.getElementById("m-close").addEventListener("click", closeModal);
+document.getElementById("m-prev").addEventListener("click", function () { show(openIdx - 1); });
+document.getElementById("m-next").addEventListener("click", function () { show(openIdx + 1); });
+document.addEventListener("keydown", function (e) {
+  if (modal.hidden) return;
+  if (e.key === "Escape") closeModal();
+  else if (e.key === "ArrowLeft") show(openIdx - 1);
+  else if (e.key === "ArrowRight") show(openIdx + 1);
+  else if (e.key === "Tab") {
+    var f = modal.querySelectorAll("button, a[href]");
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
+var featuredBox = document.getElementById("featured");
+FEATURED_ORDER.forEach(function (ref) {
+  var w = WATCHES.filter(function (x) { return x.ref === ref; })[0];
+  featuredBox.appendChild(card(w, true));
+});
+
+var grid = document.getElementById("grid");
+var filtersBox = document.getElementById("filters");
+var FILTERS = [
+  { key: "todos", label: "Todos" },
+  { key: "cuero", label: "Correa de cuero" },
+  { key: "acero", label: "Acero" }
+];
+var current = "todos";
+
+function count(key) {
+  return WATCHES.filter(function (w) { return key === "todos" || w.strap === key; }).length;
+}
+
+function render() {
+  grid.innerHTML = "";
+  WATCHES.forEach(function (w) {
+    if (current === "todos" || w.strap === current) grid.appendChild(card(w, false));
+  });
+  Array.prototype.forEach.call(filtersBox.children, function (b) {
+    b.setAttribute("aria-pressed", b.dataset.key === current ? "true" : "false");
+  });
+}
+
+FILTERS.forEach(function (f) {
+  var b = document.createElement("button");
+  b.type = "button";
+  b.className = "chip";
+  b.dataset.key = f.key;
+  b.innerHTML = f.label + '<span class="n">' + count(f.key) + '</span>';
+  b.addEventListener("click", function () { current = f.key; render(); });
+  filtersBox.appendChild(b);
+});
+render();
+</script>
+
+</body></html>
